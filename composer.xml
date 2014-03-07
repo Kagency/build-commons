@@ -25,7 +25,6 @@
     </target>
 
     <target name="dependencies-install" depends="install-or-update" extensionOf="-initialize:main~hook">
-        <echo>Install composer dependencies</echo>
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="install" />
