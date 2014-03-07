@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="checkstyle">
+    <target name="main" extensionOf="-test-static:main~hook">
+        <exec executable="${bindir}/phpcs" failonerror="${test-static-checkstyle.fail-on-violation}" dir="${basedir}">
+            <arg value="--standard=${coding.standard}" />
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${logdir}/checkstyle-result.xml" />
+            <arg value="${srcdir}" />
+        </exec>
+    </target>
+</project>

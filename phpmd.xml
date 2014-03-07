@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpmd">
+    <target name="main" extensionOf="-test-static:main~hook">
+        <fileset id="test-static-pmd.fileset" dir="${srcdir}" casesensitive="no">
+            <include name="**/*.php" />
+        </fileset>
+
+        <pathconvert pathsep="," property="test-static-pmd.files" refid="test-static-pmd.fileset"/>
+
+        <exec executable="${bindir}/phpmd" failonerror="${test-static-pmd.fail-on-violation}" dir="${srcdir}">
+            <arg value="${test-static-pmd.files}" />
+            <arg value="xml" />
+            <arg value="codesize,design" />
+            <arg line="--reportfile" />
+            <arg line="${logdir}/pmd.xml" />
+        </exec>
+    </target>
+</project>

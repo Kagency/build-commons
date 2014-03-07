@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="composer">
+    <!--
+         Initialize extension, which install composer PHP dependencies
+    -->
+    <target name="install-or-update" depends="install, self-update" />
+
+    <target name="install" depends="exists" unless="${-composer.exists}">
+        <get src="http://getcomposer.org/composer.phar"
+             dest="${basedir}/composer.phar" />
+
+        <chmod file="${basedir}/composer.phar" perm="ugo+rx"/>
+    </target>
+
+    <target name="self-update" depends="exists" if="${-composer.exists}">
+        <exec executable="php" failonerror="true">
+            <arg value="${basedir}/composer.phar" />
+            <arg value="selfupdate" />
+        </exec>
+    </target>
+
+    <target name="exists">
+        <available file="${basedir}/composer.phar"
+                   property="-composer.exists" />
+    </target>
+
+    <target name="dependencies-install" depends="install-or-update" extensionOf="-initialize:main~hook">
+        <echo>Install composer dependencies</echo>
+        <exec executable="php" failonerror="true">
+            <arg value="${basedir}/composer.phar" />
+            <arg value="install" />
+        </exec>
+    </target>
+</project>

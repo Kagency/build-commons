@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpunit">
+    <!--
+         Test-Unit: Run PHPUnit tests, if phpunit.xml is available in the project root.
+    -->
+    <target name="check">
+        <available file="${basedir}/phpunit.xml" property="-phpunit:active"/>
+    </target>
+
+    <target name="main" extensionOf="-test-unit:main~hook" depends="check" if="-phpunit:active">
+        <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
+            <arg value="--configuration" />
+            <arg value="${basedir}/phpunit.xml" />
+            <arg value="--log-junit" />
+            <arg value="${logdir}/junit.xml" />
+        </exec>
+    </target>
+
+    <target name="coverage" extensionOf="-test-static:main~hook" depends="check" if="-phpunit:active">
+        <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
+            <arg value="--configuration" />
+            <arg value="${basedir}/phpunit.xml" />
+            <arg value="--coverage-clover" />
+            <arg value="${logdir}/clover.xml" />
+            <arg value="--coverage-html" />
+            <arg value="${builddir}/coverage" />
+        </exec>
+    </target>
+</project>

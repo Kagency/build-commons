@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="behat">
+    <!--
+         Test-Feature: Run Behat tests, if behat.yml is available in the project root.
+    -->
+    <target name="check">
+        <available file="${basedir}/behat.yml" property="-behat:active"/>
+    </target>
+
+    <target name="main" extensionOf="-test-feature:main~hook" depends="check" if="-behat:active">
+        <exec executable="${bindir}/behat" failonerror="${behat.fail-on-violation}" dir="${basedir}">
+            <arg value="--format" />
+            <arg value="junit,progress" />
+            <arg value="--out" />
+            <arg value="${logdir}," />
+        </exec>
+    </target>
+</project>

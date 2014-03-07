@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pdepend">
+    <target name="main" extensionOf="-test-static:main~hook">
+        <exec executable="${bindir}/pdepend" failonerror="${test-static-pdepend.fail-on-violation}" dir="${basedir}">
+            <arg value="--jdepend-xml=${logdir}/jdepend.xml" />
+            <arg value="${srcdir}" />
+        </exec>
+    </target>
+</project>
