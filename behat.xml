@@ -9,6 +9,7 @@
 
     <target name="main" extensionOf="-test-feature:main~hook" depends="check" if="-behat:active">
         <exec executable="${bindir}/behat" failonerror="${behat.fail-on-violation}" dir="${basedir}">
+            <arg value="--no-snippets" />
             <arg value="--format" />
             <arg value="junit,progress" />
             <arg value="--out" />
