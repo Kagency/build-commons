@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="phpmd">
-    <target name="main" extensionOf="-test-static:main~hook">
+<project>
+    <target name="phpmd" extensionOf="-test-static:main~hook">
         <fileset id="test-static-pmd.fileset" dir="${srcdir}" casesensitive="no">
             <include name="**/*.php" />
         </fileset>

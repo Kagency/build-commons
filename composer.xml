@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="composer">
+<project>
     <!--
          Initialize extension, which install composer PHP dependencies
     -->
-    <target name="install-or-update" depends="install, self-update" />
+    <target name="-composer:install-or-update" depends="-composer:install, -composer:self-update" />
 
-    <target name="install" depends="exists" unless="${-composer.exists}">
+    <target name="-composer:install" depends="-composer:exists" unless="${-composer.exists}">
         <get src="http://getcomposer.org/composer.phar"
              dest="${basedir}/composer.phar" />
 
         <chmod file="${basedir}/composer.phar" perm="ugo+rx"/>
     </target>
 
-    <target name="self-update" depends="exists" if="${-composer.exists}">
+    <target name="-composer:self-update" depends="-composer:exists" if="${-composer.exists}">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="selfupdate" />
         </exec>
     </target>
 
-    <target name="exists">
+    <target name="-composer:exists">
         <available file="${basedir}/composer.phar"
                    property="-composer.exists" />
     </target>
 
-    <target name="dependencies-install" depends="install-or-update" extensionOf="-initialize:main~hook">
+    <target name="composer:install" depends="-composer:install-or-update" extensionOf="-initialize:main~hook">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="install" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="phpcpd">
-    <target name="main" extensionOf="-test-static:main~hook">
+<project>
+    <target name="phpcpd" extensionOf="-test-static:main~hook">
         <exec executable="${bindir}/phpcpd" failonerror="${test-static-cpd.fail-on-violation}" dir="${basedir}">
             <arg value="--log-pmd" />
             <arg value="${logdir}/cpd.xml" />
