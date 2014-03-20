@@ -24,6 +24,7 @@
             <arg value="${logdir}/clover.xml" />
             <arg value="--coverage-html" />
             <arg value="${builddir}/coverage" />
+            <arg value="--coverage-text" />
         </exec>
     </target>
 </project>
