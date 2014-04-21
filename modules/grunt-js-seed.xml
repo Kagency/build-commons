@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-    <target name="grunt:clean" extensionOf="-clean:after~hook">
-        <exec executable="grunt" failonerror="true">
-            <arg value="clean" />
-        </exec>
-    </target>
-
     <target name="grunt:symlink" extensionOf="-initialize:after~hook">
         <exec executable="grunt" failonerror="true">
             <arg value="symlink:www" />
