@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <target name="grunt:clean" extensionOf="-clean:after~hook">
+        <exec executable="grunt" failonerror="true">
+            <arg value="clean" />
+        </exec>
+    </target>
+
+    <target name="grunt:symlink" extensionOf="-initialize:after~hook">
+        <exec executable="grunt" failonerror="true">
+            <arg value="symlink:www" />
+        </exec>
+    </target>
+
+    <target name="grunt:jshint" extensionOf="-test-static:main~hook">
+        <exec executable="grunt" failonerror="true">
+            <arg value="jshint" />
+        </exec>
+    </target>
+
+    <target name="grunt:test" extensionOf="-test-unit:main~hook">
+        <exec executable="grunt" failonerror="true">
+            <arg value="test" />
+        </exec>
+    </target>
+
+    <target name="grunt:package" extensionOf="-package:before~hook">
+        <exec executable="grunt" failonerror="true">
+            <arg value="build" />
+        </exec>
+    </target>
+</project>
