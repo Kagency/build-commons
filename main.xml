@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="./">
+
+    <!--
+        Include project properties.
+    -->
+    <property file="${basedir}/build.properties.local" />
+    <property file="${basedir}/build.properties" />
+
+    <property name="builddir" location="${basedir}/build/" />
+    <property name="logdir" location="${builddir}/log/" />
+    <property name="srcdir" location="${basedir}/src/" />
+    <property name="bindir" location="${basedir}/vendor/bin/" />
+
+    <!--
+         Clean: Clean up old build artifacts
+    -->
+    <target name="clean" depends="-clean:before~hook, -clean:main, -clean:after~hook" />
+
+    <target name="-clean:main">
+        <delete dir="{$builddir}"/>
+    </target>
+
+    <extension-point name="-clean:before~hook" />
+    <extension-point name="-clean:after~hook" />
+
+    <!--
+        Initialize: Setup databases and fixture dependencies
+    -->
+    <target name="initialize" depends="clean, -initialize:before~hook, -initialize:main~hook, -initialize:after~hook" />
+
+    <extension-point name="-initialize:before~hook" />
+    <extension-point name="-initialize:main~hook" />
+    <extension-point name="-initialize:after~hook" />
+
+    <!--
+         Prepare: Set up all directories, required for the build process
+    -->
+    <target name="prepare" depends="initialize, -prepare:before~hook, -prepare:main, -prepare:after~hook" />
+
+    <target name="-prepare:main" depends="clean">
+        <mkdir dir="${builddir}" />
+        <mkdir dir="${logdir}" />
+    </target>
+
+    <extension-point name="-prepare:before~hook" />
+    <extension-point name="-prepare:after~hook" />
+
+    <target name="test" depends="prepare, test-dynamic, test-static" />
+
+    <target name="test-dynamic" depends="test-unit, test-feature" />
+
+    <!--
+         Hook for unit tests
+    -->
+    <target name="test-unit" depends="prepare, -test-unit:before~hook, -test-unit:main~hook, -test-unit:after~hook" />
+
+    <extension-point name="-test-unit:before~hook" />
+    <extension-point name="-test-unit:main~hook" />
+    <extension-point name="-test-unit:after~hook" />
+
+    <!--
+         Hook for feature tests
+    -->
+    <target name="test-feature" depends="-test-feature:before~hook, -test-feature:main~hook, -test-feature:after~hook" />
+
+    <extension-point name="-test-feature:before~hook" />
+    <extension-point name="-test-feature:main~hook" />
+    <extension-point name="-test-feature:after~hook" />
+
+    <!--
+         Hook for static code analysis
+    -->
+    <target name="test-static" depends="-test-static:before~hook, -test-static:main~hook, -test-static:after~hook" />
+
+    <extension-point name="-test-static:before~hook" />
+    <extension-point name="-test-static:main~hook" />
+    <extension-point name="-test-static:after~hook" />
+
+    <!--
+         Package target: Builds release package
+    -->
+    <target name="package" depends="-package:before~hook, -package:main~hook, -package:after~hook" />
+
+    <extension-point name="-package:before~hook" />
+    <extension-point name="-package:main~hook" />
+    <extension-point name="-package:after~hook" />
+
+    <!--
+         Deploy target: Moves the packaged and tested to the remote host
+    -->
+    <target name="deploy" depends="-deploy:before~hook, -deploy:main~hook, -deploy:after~hook" />
+
+    <extension-point name="-deploy:before~hook" />
+    <extension-point name="-deploy:main~hook" />
+    <extension-point name="-deploy:after~hook" />
+</project>
