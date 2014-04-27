@@ -12,7 +12,7 @@
         <chmod file="${basedir}/composer.phar" perm="ugo+rx"/>
     </target>
 
-    <target name="-composer:self-update" depends="-composer:exists" if="${-composer.exists}">
+    <target name="-composer:self-update" depends="-composer:exists" if="${-composer.exists}" unless="offline">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="selfupdate" />
@@ -24,7 +24,7 @@
                    property="-composer.exists" />
     </target>
 
-    <target name="composer:install" depends="-composer:install-or-update" extensionOf="-initialize:main~hook">
+    <target name="composer:install" depends="-composer:install-or-update" extensionOf="-initialize:main~hook" unless="offline">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="install" />
