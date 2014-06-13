@@ -18,7 +18,7 @@
     <target name="clean" depends="-clean:before~hook, -clean:main, -clean:after~hook" />
 
     <target name="-clean:main">
-        <delete dir="{$builddir}"/>
+        <delete dir="${builddir}"/>
     </target>
 
     <extension-point name="-clean:before~hook" />
