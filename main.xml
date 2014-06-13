@@ -80,7 +80,7 @@
     <!--
          Package target: Builds release package
     -->
-    <target name="package" depends="-package:before~hook, -package:main~hook, -package:after~hook" />
+    <target name="package" depends="test, -package:before~hook, -package:main~hook, -package:after~hook" />
 
     <extension-point name="-package:before~hook" />
     <extension-point name="-package:main~hook" />
@@ -89,7 +89,7 @@
     <!--
          Deploy target: Moves the packaged and tested to the remote host
     -->
-    <target name="deploy" depends="-deploy:before~hook, -deploy:main~hook, -deploy:after~hook" />
+    <target name="deploy" depends="package, -deploy:before~hook, -deploy:main~hook, -deploy:after~hook" />
 
     <extension-point name="-deploy:before~hook" />
     <extension-point name="-deploy:main~hook" />
