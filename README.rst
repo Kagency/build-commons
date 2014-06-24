@@ -26,7 +26,7 @@ Simple variant
 ==============
 
 The simple variant expects the build-commons to already be intialized somehow.
-It will just fail hard, if the mian.xml etc. are not available::
+It will just fail hard, if the main.xml etc. are not available::
 
     <?xml version="1.0" encoding="UTF-8"?>
     <project name="My Project" basedir="./" default="test">
