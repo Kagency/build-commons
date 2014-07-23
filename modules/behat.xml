@@ -3,6 +3,8 @@
     <!--
          Test-Feature: Run Behat tests, if behat.yml is available in the project root.
     -->
+    <property name="behat.config" location="behat.yml" />
+
     <target name="-behat:check">
         <available file="${basedir}/behat.yml" property="-behat:active"/>
     </target>
@@ -10,6 +12,8 @@
     <target name="behat" extensionOf="-test-feature:main~hook" depends="-behat:check" if="-behat:active">
         <exec executable="${bindir}/behat" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
             <arg value="--no-snippets" />
+            <arg value="--config" />
+            <arg value="${behat.config}" />
             <arg value="--format" />
             <arg value="junit,progress" />
             <arg value="--out" />
