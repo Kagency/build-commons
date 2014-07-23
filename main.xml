@@ -7,6 +7,9 @@
     <property file="${basedir}/build.properties.local" />
     <property file="${basedir}/build.properties" />
 
+    <property name="test-unit.fail-on-violation" value="true" />
+    <property name="test-feature.fail-on-violation" value="true" />
+
     <property name="builddir" location="${basedir}/build/" />
     <property name="logdir" location="${builddir}/log/" />
     <property name="srcdir" location="${basedir}/src/" />
