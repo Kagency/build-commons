@@ -5,6 +5,7 @@
             <arg value="--standard=${coding.standard}" />
             <arg value="--report=full" />
             <arg value="--report-checkstyle=${logdir}/checkstyle-result.xml" />
+            <arg value="--extensions=php" />
             <arg value="${srcdir}" />
         </exec>
     </target>
