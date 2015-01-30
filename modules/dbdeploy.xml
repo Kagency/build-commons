@@ -68,7 +68,7 @@
         </sql>
     </target>
 
-    <target name="dbdeploy" extensionOf="-initialize:main~hook">
+    <target name="dbdeploy" extensionOf="-prepare:after~hook">
         <antcall target="-dbdeploy:migrate" />
     </target>
 </project>
