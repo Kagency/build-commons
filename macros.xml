@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <macrodef name="tool-exists">
+        <attribute name="executable"
+            description="Name of the tool to look for" />
+        <attribute name="error"
+            default="Tool @{executable} could not be found in the $PATH"
+            description="Error message, which is issued, if the tool could not be found." />
+
+        <sequential>
+            <property environment="env" /> 
+            <fail message="@{error}">
+                <condition>
+                    <not>
+                        <available file="@{executable}" filepath="${env.PATH}" />
+                    </not>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="php-tool-installed">
+        <attribute name="executable"
+            description="Name of the tool to look for" />
+        <attribute name="package"
+            description="Name of the package in which the executable can be found" />
+
+        <sequential>
+            <fail message="Install @{executable} using `php composer.phar require-dev @{package}`.">
+                <condition>
+                    <not>
+                        <available file="@{executable}" filepath="${bindir}" />
+                    </not>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+</project>

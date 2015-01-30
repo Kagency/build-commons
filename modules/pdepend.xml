@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <target name="pdepend" extensionOf="-test-static:main~hook">
+        <php-tool-installed executable="pdepend" package="pdepend/pdepend" />
+
         <exec executable="${bindir}/pdepend" failonerror="${test-static-pdepend.fail-on-violation}" dir="${basedir}">
             <arg value="--jdepend-xml=${logdir}/jdepend.xml" />
             <arg value="${srcdir}" />

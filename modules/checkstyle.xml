@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <target name="checkstyle" extensionOf="-test-static:main~hook">
+        <php-tool-installed executable="phpcs" package="squizlabs/php_codesniffer" />
+
         <exec executable="${bindir}/phpcs" failonerror="${test-static-checkstyle.fail-on-violation}" dir="${basedir}">
             <arg value="--standard=${coding.standard}" />
             <arg value="--report=full" />

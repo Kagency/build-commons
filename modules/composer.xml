@@ -13,6 +13,8 @@
     </target>
 
     <target name="-composer:self-update" depends="-composer:exists" if="${-composer.exists}" unless="offline">
+        <tool-exists executable="php" />
+
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="selfupdate" />
@@ -25,6 +27,8 @@
     </target>
 
     <target name="composer:install" depends="-composer:install-or-update" extensionOf="-initialize:main~hook" unless="offline">
+        <tool-exists executable="php" />
+
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/composer.phar" />
             <arg value="install" />

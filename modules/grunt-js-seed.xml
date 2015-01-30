@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <target name="grunt:symlink" extensionOf="-initialize:after~hook">
+        <tool-exists executable="grunt" error="Install grunt using `npm install -g grunt-cli`" />
+
         <exec executable="grunt" failonerror="true">
             <arg value="symlink:www" />
         </exec>
     </target>
 
     <target name="grunt:jshint" extensionOf="-test-static:main~hook">
+        <tool-exists executable="grunt" error="Install grunt using `npm install -g grunt-cli`" />
+
         <exec executable="grunt" failonerror="true">
             <arg value="jshint" />
         </exec>
     </target>
 
     <target name="grunt:test" extensionOf="-test-unit:main~hook">
+        <tool-exists executable="grunt" error="Install grunt using `npm install -g grunt-cli`" />
+
         <exec executable="grunt" failonerror="true">
             <arg value="test" />
         </exec>
     </target>
 
     <target name="grunt:package" extensionOf="-package:before~hook">
+        <tool-exists executable="grunt" error="Install grunt using `npm install -g grunt-cli`" />
+
         <exec executable="grunt" failonerror="true">
             <arg value="build" />
         </exec>

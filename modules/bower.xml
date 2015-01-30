@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <target name="bower:install" extensionOf="-initialize:main~hook" unless="offline">
+        <tool-exists executable="bower" error="Install bower using `npm install -g bower`" />
+
         <exec executable="bower" failonerror="true">
             <env key="CI" value="true" />
             <arg value="install" />

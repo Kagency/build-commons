@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <target name="phpmd.run">
+        <php-tool-installed executable="phpmd" package="phpmd/phpmd" />
+
         <fileset id="test-static-pmd.fileset" dir="${srcdir}" casesensitive="no">
             <include name="**/*.php" />
         </fileset>

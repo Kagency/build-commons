@@ -8,6 +8,8 @@
     </target>
 
     <target name="phpunit" extensionOf="-test-unit:main~hook" depends="-phpunit:check" if="-phpunit:active">
+        <php-tool-installed executable="phpunit" package="phpunit/phpunit" />
+
         <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
             <arg value="--configuration" />
             <arg value="${basedir}/phpunit.xml" />
@@ -17,6 +19,8 @@
     </target>
 
     <target name="-phpunit:coverage" extensionOf="-test-static:main~hook" depends="-phpunit:check" if="-phpunit:active">
+        <php-tool-installed executable="phpunit" package="phpunit/phpunit" />
+
         <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
             <arg value="--configuration" />
             <arg value="${basedir}/phpunit.xml" />
