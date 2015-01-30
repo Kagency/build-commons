@@ -8,17 +8,32 @@ a common set of modules hooking into this build pipeline.
 The tasks you can call are:
 
 * clean
+
 * initialize
+
 * prepare
+
 * test
-* test-dynamic
-* test-unit
-* test-feature
-* test-static
+
+  * test-dynamic
+
+    * test-unit
+
+    * test-feature
+
+  * test-static
+
 * package
 
 The modules, you can activate in your custom build.xml hook into those steps as
-apropriate.
+apropriate. The modules themselves are build with the following constraints in
+mind:
+
+* Be multi-platform as far as possible
+
+* Try to fail with errors which are easy to fix
+
+* Seperate concerns as far as possible – do one job well.
 
 The custom build.xml can be build in different variants.
 
