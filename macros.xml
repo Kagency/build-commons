@@ -35,4 +35,24 @@
             </fail>
         </sequential>
     </macrodef>
+
+    <macrodef name="download-zip-and-extract">
+        <attribute name="source"
+            description="URL where to find the archive" />
+        <attribute name="file"
+            description="File to copy from the extracted ZIP" />
+        <attribute name="target"
+            description="Target directory to copy file to"
+            default="${commons.downloads}" />
+
+        <sequential>
+            <delete dir="${builddir}/archive"/>
+            <get src="@{source}" dest="${builddir}/download.zip" />
+            <mkdir dir="${builddir}/archive"/>
+            <unzip src="${builddir}/download.zip" dest="${builddir}/archive"/>
+            <move todir="@{target}">
+                <fileset file="${builddir}/archive/@{file}" />
+            </move>
+        </sequential>
+    </macrodef>
 </project>

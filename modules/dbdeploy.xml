@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <property name="dbdeploy.system" value="mysql" />
+    <property name="dbdeploy.driver" value="com.mysql.jdbc.Driver" />
+
+    <property name="dbdeploy.url" value="jdbc:${dbdeploy.system}://${database.host}/${database.name}" />
+    <property name="dbdeploy.userid" value="${database.user}" />
+    <property name="dbdeploy.password" value="${database.password}" />
+    <property name="dbdeploy.deltadir" value="${srcdir}/schema/" />
+    <property name="dbdeploy.schema" location="${commons.basedir}/modules/dbdeploy/${dbdeploy.system}.sql" />
+
+    <property name="-dbdeploy:migrate.script" location="${builddir}/dbdeploy-migrate.sql" />
+    <property name="-dbdeploy:rollback.script" location="${builddir}/dbdeploy-rollback.sql" />
+
+    <target name="-dbdeploy:init">
+        <download-zip-and-extract
+            source="https://dbdeploy.googlecode.com/files/dbdeploy-dist-3.0M3-distribution.zip"
+            file="dbdeploy-3.0M3/dbdeploy-ant-3.0M3.jar" />
+
+        <download-zip-and-extract
+            source="http://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-5.1.34.zip"
+            file="mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar" />
+
+        <path id="-dbdeploy:classpath">
+            <fileset dir="${commons.downloads}">
+                <include name="dbdeploy-ant-*.jar"/>
+                <include name="${dbdeploy.system}*.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget">
+            <classpath refid="-dbdeploy:classpath" />
+        </taskdef>
+
+        <sql driver="${dbdeploy.driver}"
+             url="${dbdeploy.url}"
+             userid="${dbdeploy.userid}"
+             password="${dbdeploy.password}"
+			 src="${dbdeploy.schema}"
+			 taskname="dbdeploy:init">
+            <classpath refid="-dbdeploy:classpath" />
+        </sql>
+	</target>
+
+    <target name="-dbdeploy:generate" depends="-dbdeploy:init">
+        <dbdeploy
+            userid="${dbdeploy.userid}"
+            password="${dbdeploy.password}"
+            driver="${dbdeploy.driver}"
+            url="${dbdeploy.url}"
+            dbms="${dbdeploy.system}"
+            dir="${dbdeploy.deltadir}"
+            outputfile="${-dbdeploy:migrate.script}"
+            undoOutputfile="${-dbdeploy:rollback.script}"
+            changeLogTableName="changelog"
+            taskname="dbdeploy:generate" />
+    </target>
+
+    <target name="-dbdeploy:migrate" depends="-dbdeploy:generate">
+        <sql driver="${dbdeploy.driver}"
+             url="${dbdeploy.url}"
+             userid="${dbdeploy.userid}"
+             password="${dbdeploy.password}"
+			 src="${-dbdeploy:migrate.script}"
+			 taskname="dbdeploy:migrate">
+
+            <classpath refid="-dbdeploy:classpath" />
+        </sql>
+    </target>
+
+    <target name="dbdeploy" extensionOf="-initialize:main~hook">
+        <antcall target="-dbdeploy:migrate" />
+    </target>
+</project>

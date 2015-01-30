@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="./">
+<project name="build-commons" basedir="./">
 
     <!--
         Include project properties.
@@ -14,6 +14,8 @@
     <property name="logdir" location="${builddir}/log/" />
     <property name="srcdir" location="${basedir}/src/" />
     <property name="bindir" location="${basedir}/vendor/bin/" />
+    <dirname property="commons.basedir" file="${ant.file.build-commons}" />
+    <property name="commons.downloads" location="${commons.basedir}/downloads/" />
 
     <import file="macros.xml" />
 
