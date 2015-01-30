@@ -79,8 +79,8 @@ All following import statements include optional modules. Just include those
 you want to use. This entirely depends on you project. You might also want to
 include project specific custom "modules".
 
-Automatic initialization
-========================
+Automatic Initialization (GIT)
+==============================
 
 You can create a build.xml which ensures the submodule is initialized on the
 first run. It looks fairly similar to the one above, but all imports are
