@@ -35,27 +35,4 @@
             </fail>
         </sequential>
     </macrodef>
-
-    <macrodef name="download-zip-and-extract">
-        <attribute name="source"
-            description="URL where to find the archive" />
-        <attribute name="file"
-            description="File to copy from the extracted ZIP" />
-        <attribute name="target"
-            description="Target directory to copy file to"
-            default="${commons.downloads}" />
-
-        <sequential>
-            <basename property="target.file" file="@{file}" />
-            <available property="target.file.exists" file="${commons.downloads}/${target.file}" />
-
-            <delete unless:true="${target.file.exists}" dir="${builddir}/archive" />
-            <get    unless:true="${target.file.exists}" src="@{source}" dest="${builddir}/download.zip" />
-            <mkdir  unless:true="${target.file.exists}" dir="${builddir}/archive" />
-            <unzip  unless:true="${target.file.exists}" src="${builddir}/download.zip" dest="${builddir}/archive" />
-            <move   unless:true="${target.file.exists}" todir="@{target}">
-                <fileset file="${builddir}/archive/@{file}" />
-            </move>
-        </sequential>
-    </macrodef>
 </project>
