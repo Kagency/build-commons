@@ -27,7 +27,7 @@
     </target>
 
     <target name="-dbdeploy:has-mysql">
-        <available property="-dbdeploy:has-dbdeploy" file="${commons.downloads}/mysql-connector-java-5.1.34-bin.jar" />
+        <available property="-dbdeploy:has-mysql" file="${commons.downloads}/mysql-connector-java-5.1.34-bin.jar" />
     </target>
 
     <target name="-dbdeploy:download-mysql" depends="-dbdeploy:has-mysql" unless="-dbdeploy:has-mysql">
