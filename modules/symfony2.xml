@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <target name="symfony:assets:install" extensionOf="-prepare:after~hook">
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="assets:install" />
+            <arg value="--symlink" />
+        </exec>
+    </target>
+</project>
