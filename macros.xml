@@ -11,9 +11,14 @@
             <property environment="env" /> 
             <fail message="@{error}">
                 <condition>
-                    <not>
-                        <available file="@{executable}" filepath="${env.PATH}" />
-                    </not>
+                    <and>
+                        <not>
+                            <available file="@{executable}" />
+                        </not>
+                        <not>
+                            <available file="@{executable}" filepath="${env.PATH}" />
+                        </not>
+                    </and>
                 </condition>
             </fail>
         </sequential>

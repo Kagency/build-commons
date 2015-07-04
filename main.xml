@@ -4,6 +4,9 @@
     <!--
         Include project properties.
     -->
+    <dirname property="basedir.commons" file="${ant.file.build-commons}" />
+    <property file="${basedir.commons}/properties" />
+
     <property file="${basedir}/build.properties.local" />
     <property file="${basedir}/build.properties" />
 
