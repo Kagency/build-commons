@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <!--
+         Test-spec: Run phpspec tests, if phpspec.yml is available in the project root.
+    -->
+    <target name="-phpspec:check">
+        <available file="${basedir}/phpspec.yml" property="-phpspec:active"/>
+    </target>
+
+    <target name="phpspec" extensionOf="-test-spec:main~hook" depends="-phpspec:check" if="-phpspec:active">
+        <php-tool-installed executable="phpspec" package="phpspec/phpspec" />
+
+        <exec executable="${bindir}/phpspec" failonerror="${test-spec.fail-on-violation}" dir="${basedir}">
+            <arg value="run"/>
+            <arg value="--config" />
+            <arg value="${basedir}/phpspec.yml" />
+            <arg value="--format" />
+            <arg value="junit" />
+            <redirector output="${logdir}/spec.xml" alwayslog="false"/>
+        </exec>
+    </target>
+</project>

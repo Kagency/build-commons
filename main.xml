@@ -11,6 +11,7 @@
     <property file="${basedir}/build.properties" />
 
     <property name="test-unit.fail-on-violation" value="true" />
+    <property name="test-spec.fail-on-violation" value="true" />
     <property name="test-feature.fail-on-violation" value="true" />
 
     <property name="builddir" location="${basedir}/build/" />
@@ -58,7 +59,7 @@
 
     <target name="test" depends="prepare, test-dynamic, test-static" />
 
-    <target name="test-dynamic" depends="test-unit, test-feature" />
+    <target name="test-dynamic" depends="test-unit, test-spec, test-feature" />
 
     <!--
          Hook for unit tests
@@ -68,6 +69,15 @@
     <extension-point name="-test-unit:before~hook" />
     <extension-point name="-test-unit:main~hook" />
     <extension-point name="-test-unit:after~hook" />
+
+    <!--
+         Hook for spec tests
+    -->
+    <target name="test-spec" depends="prepare, -test-spec:before~hook, -test-spec:main~hook, -test-spec:after~hook" />
+
+    <extension-point name="-test-spec:before~hook" />
+    <extension-point name="-test-spec:main~hook" />
+    <extension-point name="-test-spec:after~hook" />
 
     <!--
          Hook for feature tests
