@@ -3,8 +3,17 @@
     <target name="pdepend" extensionOf="-test-static:main~hook">
         <php-tool-installed executable="pdepend" package="pdepend/pdepend" />
 
+        <condition property="pdepend.coverage.report" value="--coverage-report=${logdir}/clover.xml" else="">
+            <resourceexists>
+                <file file="${logdir}/clover.xml"/>
+            </resourceexists>
+        </condition>
+
         <exec executable="${bindir}/pdepend" failonerror="${test-static-pdepend.fail-on-violation}" dir="${basedir}">
             <arg value="--jdepend-xml=${logdir}/jdepend.xml" />
+            <arg value="--summary-xml=${logdir}/pdepend.xml" />
+            <arg value="--coderank-mode=inheritance,property,method" />
+            <arg line="${pdepend.coverage.report}" />
             <arg value="${srcdir}" />
         </exec>
     </target>
