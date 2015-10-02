@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <property name="grunt.executable" location="node_modules/grunt-cli/bin/grunt" />
+
+    <target name="-grunt:check">
+        <tool-exists executable="${grunt.executable}" error="Install grunt using `npm install grunt-cli`" />
+    </target>
+
+    <target name="grunt:initialize" depends="-grunt:check" extensionOf="-initialize:after~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="initialize" />
+        </exec>
+    </target>
+
+    <target name="grunt:prepare" depends="-grunt:check" extensionOf="-prepare:after~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="prepare" />
+        </exec>
+    </target>
+
+    <target name="grunt:test-unit" depends="-grunt:check" extensionOf="-test-unit:main~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="test-unit" />
+        </exec>
+    </target>
+
+    <target name="grunt:test-spec" depends="-grunt:check" extensionOf="-test-spec:main~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="test-spec" />
+        </exec>
+    </target>
+
+    <target name="grunt:test-feature" depends="-grunt:check" extensionOf="-test-feature:main~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="test-feature" />
+        </exec>
+    </target>
+
+    <target name="grunt:test-static" depends="-grunt:check" extensionOf="-test-static:main~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="test-static" />
+        </exec>
+    </target>
+
+    <target name="grunt:package" depends="-grunt:check" extensionOf="-package:main~hook">
+        <exec executable="${grunt.executable}" failonerror="true">
+            <arg value="package" />
+        </exec>
+    </target>
+</project>
