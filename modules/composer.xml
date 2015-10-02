@@ -5,7 +5,7 @@
     -->
     <target name="-composer:install-or-update" depends="-composer:install, -composer:self-update" />
 
-    <target name="-composer:install" depends="-composer:exists" unless="${-composer.exists}" unless="offline">
+    <target name="-composer:install" depends="-composer:exists" unless="${-composer.exists}">
         <get src="http://getcomposer.org/composer.phar"
              dest="${basedir}/composer.phar" />
 
