@@ -27,16 +27,16 @@
     </target>
 
     <target name="-dbdeploy:has-mysql">
-        <available property="-dbdeploy:has-mysql" file="${commons.downloads}/mysql-connector-java-5.1.34-bin.jar" />
+        <available property="-dbdeploy:has-mysql" file="${commons.downloads}/mysql-connector-java-5.1.38-bin.jar" />
     </target>
 
     <target name="-dbdeploy:download-mysql" depends="-dbdeploy:has-mysql" unless="-dbdeploy:has-mysql">
         <delete dir="${builddir}/archive" />
-        <get src="http://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-5.1.34.zip" dest="${builddir}/download.zip" />
+        <get src="http://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-5.1.38.zip" dest="${builddir}/download.zip" />
         <mkdir dir="${builddir}/archive" />
         <unzip src="${builddir}/download.zip" dest="${builddir}/archive" />
         <move todir="${commons.downloads}">
-            <fileset file="${builddir}/archive/mysql-connector-java-5.1.34/mysql-connector-java-5.1.34-bin.jar" />
+            <fileset file="${builddir}/archive/mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar" />
         </move>
     </target>
 
