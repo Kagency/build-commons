@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
+    <property name="coding.standard" value="PSR2" />
+
     <target name="checkstyle" extensionOf="-test-static:main~hook">
         <php-tool-installed executable="phpcs" package="squizlabs/php_codesniffer" />
 
