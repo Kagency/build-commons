@@ -18,7 +18,7 @@
 
     <target name="-dbdeploy:download-dbdeploy" depends="-dbdeploy:has-dbdeploy" unless="-dbdeploy:has-dbdeploy">
         <delete dir="${builddir}/archive" />
-        <get src="https://dbdeploy.googlecode.com/files/dbdeploy-dist-3.0M3-distribution.zip" dest="${builddir}/download.zip" />
+        <get src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/dbdeploy/dbdeploy-dist-3.0M3-distribution.zip" dest="${builddir}/download.zip" />
         <mkdir dir="${builddir}/archive" />
         <unzip src="${builddir}/download.zip" dest="${builddir}/archive" />
         <move todir="${commons.downloads}">
@@ -27,16 +27,16 @@
     </target>
 
     <target name="-dbdeploy:has-mysql">
-        <available property="-dbdeploy:has-mysql" file="${commons.downloads}/mysql-connector-java-5.1.38-bin.jar" />
+        <available property="-dbdeploy:has-mysql" file="${commons.downloads}/mysql-connector-java-5.1.42-bin.jar" />
     </target>
 
     <target name="-dbdeploy:download-mysql" depends="-dbdeploy:has-mysql" unless="-dbdeploy:has-mysql">
         <delete dir="${builddir}/archive" />
-        <get src="http://cdn.mysql.com/Downloads/Connector-J/mysql-connector-java-5.1.38.zip" dest="${builddir}/download.zip" />
+        <get src="https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.42.zip" dest="${builddir}/download.zip" />
         <mkdir dir="${builddir}/archive" />
         <unzip src="${builddir}/download.zip" dest="${builddir}/archive" />
         <move todir="${commons.downloads}">
-            <fileset file="${builddir}/archive/mysql-connector-java-5.1.38/mysql-connector-java-5.1.38-bin.jar" />
+            <fileset file="${builddir}/archive/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar" />
         </move>
     </target>
 
