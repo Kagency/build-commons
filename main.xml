@@ -29,9 +29,9 @@
     <target name="clean" depends="-clean:before~hook, -clean:main, -clean:after~hook" />
 
     <target name="-clean:main">
-        <property name="prodcution">
+        <condition property="prodcution">
             <equals arg1="${env}" arg2="prod" />
-        </property>
+        </condition>
 
         <delete dir="${builddir}"/>
     </target>
