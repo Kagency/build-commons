@@ -29,7 +29,7 @@
     <target name="clean" depends="-clean:before~hook, -clean:main, -clean:after~hook" />
 
     <target name="-clean:main">
-        <condition property="prodcution">
+        <condition property="production">
             <equals arg1="${env}" arg2="prod" />
         </condition>
 
